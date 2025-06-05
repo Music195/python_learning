@@ -47,3 +47,14 @@ print(name.find("t"))  # Should print -1 since "t" is not in "Win Ei"
 # }
 
 # So, str.find() returns -1 if the substring is not found.
+
+name = "Alice"
+age = 30
+
+# Using f-strings
+print(f"Name: {name:s}, Age: {age}") # :s is optional for strings here
+print(f"Name: {name}, Age: {age}")   # Same as above
+
+# Using str.format()
+print("Name: {0:s}, Age: {1}".format(name, age))
+print("Name: {}, Age: {}".format(name, age))
