@@ -18,7 +18,7 @@ else:
     # print("Invalid unit. Please enter 'kg' or 'lb'.")
     if unit not in units:
         print("Invalid unit. Please enter 'kg' or 'lb'.")
-        exit() 
+        # exit() 
     
 
 print(f"{weight} {unit} is approximately {round(converted_weight, 2)} {'lb' if unit in ['kg', 'k'] else 'kg'}.")

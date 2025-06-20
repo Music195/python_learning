@@ -16,8 +16,12 @@ while True:
         total += price
     except ValueError:
         print("Invalid input. Please enter a numeric value for the price.")
-for food in foods:
-    print(f"Food item: {food} at ${price:.2f}")
+        
+print(foods)
+print(prices)
+for food, price in zip(foods, prices):
+# for food in foods:
+    print(f"Food item: {food} for ${price:.2f}")
 # for price in prices:
 #     total += price
 
