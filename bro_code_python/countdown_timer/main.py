@@ -1,67 +1,126 @@
 import time
 import math
 
-my_time = int (input("Enter the time in seconds: "))
-init = True # initialize init to True
+inputYears = int(input("Enter years: "))
+# inputMonths = int(input("Enter months: "))
+# inputDays = int(input("Enter days: "))
+# inputHours = int(input("Enter hours: "))
+# inputMinutes = int(input("Enter minutes: "))
+# inputSeconds = int(input("Enter seconds: "))
 
-for x in range(my_time, 0, -86400):
-    sec = x % 60 # give the remainder when x is divided by 60
-    min = int(x / 60) % 60 # give the quotient when x is divided by 60 
-                            #and remainder when the quotient is divided by 60
-    hr = int(x / 3600) % 24 # give the quotient when x is divided by 3600
-    days = math.floor(int(x / 3600) / 24)
-    # month_days =math.floor(days % 30) # give the remainder when days is divided by 30
-    
+myRange = inputYears * 365 * 24 * 3600
+dayCheck = (myRange // (24 * 3600)) % 365
+if dayCheck == 0:
+    dayCheck = 365
+print(dayCheck)
+init = True
+n = 0
+dec = 0
+dayAmount = 0
+dayForMonth = 0
+
+for x in range(myRange, 0, -86400):
+    dec += 1
+     #printing the total days
+    days = x // (24 * 3600)
+    year = math.ceil (days / 365)
+    print (days)
+    print(n)
+    # checking the month index for the first time only
+    #print(init)
     if init:
-        check_month = math.floor((int((x/3600)/24) % 365))
-        if 0 <= check_month < 31:
-            n = 1 # January
-        elif 31 <= check_month < 59:
-            n = 2 # February
-        elif 59 <= check_month < 90:
-            n = 3 # March
-        elif 90 <= check_month < 120:
-            n = 4 # April
-        elif 120 <= check_month < 151:
-            n = 5 # May
-        elif 151 <= check_month < 181:
-            n = 6 # June
-        elif 181 <= check_month < 212:
-            n = 7 # July
-        elif 212 <= check_month < 243:
-            n = 8 # August
-        elif 243 <= check_month < 273:
-            n = 9 # September
-        elif 273 <= check_month < 304:
-            n = 10 # October
-        elif 304 <= check_month < 334:
-            n = 11 # November
-        elif 334 <= check_month <= 365:
-            n = 12 # December
-        init = False # set init_n to False to exit the loop after the first iteration
-    month_days = 0 # initialize month_days to 0
-    # Calculate the number of days in the current month
-    month = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-    match month[n-1]:
-        case _ if month[n-1] in (1, 3, 5, 7, 8, 10, 12): # months with 31 days
-            month_days = math.floor(days % 31) # months with 31 days
-            if month_days == 0 and month[n-1] in (1, 3, 5, 7, 8, 10, 12):
-                n -= 1 # decrease month if days is 0
-        case _ if n in (4, 6, 9, 11): # months with 30 days 
-            month_days = math.floor(days % 30) # months with 30 days
-            if month_days == 0 and month[n-1] in (4, 6, 9, 11):
-                n -= 1 #  decrease month if days is 0      
-        case _ if month[n-1] == 2: # February
-            month_days = math.floor(days % 28) # February has 28 days in a non-leap year
-            if month_days == 0 and month[n-1] == 2:
-                n -= 1 #  decrease month if days is 0
-        case _:
-            month_days = 00 # fallback case, should not happen
-    
-    print(f"{hr:02} hr: {min:02} min: {sec:02} s : {round(days):03} day/s")
-    print(f"{month_days:02} day/s")
-    print(f"{month[n-1]} month/s")
-    print("{year} year/s".format(year=math.floor((int(x / 3600) / 24)  / 365)))
-    print("-" * 35)
-    time.sleep(1)
+        if 0 < dayCheck <= 31:
+            print("January")
+            n = 1
+        elif 31 < dayCheck <= 59:
+            print("February")
+            n = 2
+        elif 59 < dayCheck <= 90:
+            print("March")
+            n = 3
+        elif 90 < dayCheck <= 120:
+            print("April")
+            n = 4
+        elif 120 < dayCheck <= 151:
+            print("May")
+            n = 5
+        elif 151 < dayCheck <= 181:
+            print("June")
+            n = 6
+        elif 181 < dayCheck <= 212:
+            print("July")
+            n = 7
+        elif 212 < dayCheck <= 243:
+            print("August")
+            n = 8
+        elif 243 < dayCheck <= 273:
+            print("September")
+            n = 9
+        elif 273 < dayCheck <= 304:
+            print("October")
+            n = 10
+        elif 304 < dayCheck <= 334:
+            print("November")
+            n = 11
+        elif 334 < dayCheck <= 365:
+            print("December")
+            n = 12
+        else:
+            n = 0
+        init = False
+        print(f"n: {n}")
+        print()
+
+
+    print(f"day amount {dayAmount}\n")
+    #for checking dec is greater than dayForMonth
+    if dec > dayAmount:
+        dec = 0
+     
+    #checking the day amount for each month
+    if n in (1,3,5,7,8,10,12):
+        dayAmount = 31
+        dayForMonth = 31
+    elif n in (4,6,9,11):
+        dayAmount = 30
+        dayForMonth = 30
+    elif n == 2:
+        #for leap year
+        if year % 4 == 0:
+            dayAmount = 29
+            dayForMonth = 29
+        else:
+            dayAmount = 28
+            dayForMonth = 28
+    else:
+        dayAmount = 0
+        dayForMonth = 0
+
+    #for reducing the days
+    dayForMonth -= dec
+    print(f"day after decreasement is {dayForMonth}")
+
+    #for decreasing the month
+    if dayForMonth == 0:
+      n -= 1
+      print(f"\nn imediately after decreasement is {n}\n")
+      days += 1 #for increasing the day by 1
+      if n == 0:
+          n = 12
+      continue
+         
+    x = x % (24 * 3600)
+    hours = x // 3600
+    x %= 3600
+    minutes = x // 60
+    x %= 60
+    seconds = x
+    print(f"\n{year} years, {n} months, {dayForMonth} days, {hours} hours, {minutes} minutes, {seconds} seconds\n")
+    print(f"final n: {n}")
+    print(f"decreasement is {dec}")
+    print("-" * 40)
+
+   
+    time.sleep(0.1)
+
 print("Time's up!")
