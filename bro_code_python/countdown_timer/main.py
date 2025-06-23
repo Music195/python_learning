@@ -1,3 +1,4 @@
+#need to modify the code to work with years and various inputs like months, days, hours, minutes, seconds
 import time
 import math
 
@@ -18,12 +19,13 @@ n = 0
 dec = 0
 dayAmount = 0
 dayForMonth = 0
+i = 0
 
 for x in range(myRange, 0, -86400):
     dec += 1
      #printing the total days
-    days = x // (24 * 3600)
-    year = math.ceil (days / 365)
+    days = x // (24 * 3600) # // gives the quotient on integer form only 
+    year = math.floor (days / 365)
     print (days)
     print(n)
     # checking the month index for the first time only
@@ -74,7 +76,7 @@ for x in range(myRange, 0, -86400):
 
     print(f"day amount {dayAmount}\n")
     #for checking dec is greater than dayForMonth
-    if dec > dayAmount:
+    if dec == dayAmount:
         dec = 0
      
     #checking the day amount for each month
@@ -101,13 +103,11 @@ for x in range(myRange, 0, -86400):
     print(f"day after decreasement is {dayForMonth}")
 
     #for decreasing the month
-    if dayForMonth == 0:
+    if dayForMonth == 1:
       n -= 1
       print(f"\nn imediately after decreasement is {n}\n")
-      days += 1 #for increasing the day by 1
       if n == 0:
           n = 12
-      continue
          
     x = x % (24 * 3600)
     hours = x // 3600
@@ -115,7 +115,12 @@ for x in range(myRange, 0, -86400):
     minutes = x // 60
     x %= 60
     seconds = x
-    print(f"\n{year} years, {n} months, {dayForMonth} days, {hours} hours, {minutes} minutes, {seconds} seconds\n")
+    i += 1
+    
+    if i != myRange // (24 * 3600):
+        print(f"\n{year} years, {n} months, {dayForMonth} days, {hours} hours, {minutes} minutes, {seconds} seconds\n")
+    else:
+        print(f"\n0 years, 0 months, 0 days, 0 hours, 0 minutes\n")
     print(f"final n: {n}")
     print(f"decreasement is {dec}")
     print("-" * 40)
