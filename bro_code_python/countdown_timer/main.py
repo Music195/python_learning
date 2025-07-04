@@ -1,6 +1,10 @@
 #need to modify the code to work with years and various inputs like months, days, hours, minutes, seconds
 import time
 import math
+import os
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 inputYears = int(input("Enter years: "))
 # inputMonths = int(input("Enter months: "))
